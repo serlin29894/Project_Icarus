@@ -5,7 +5,7 @@ using System.Collections;
 
 public class interactableObject : MonoBehaviour {
 
-   logScript logRef;
+    logScript logRef;
     public PlayerControler playerRef;
     public menuScript menuRef;
     bool isIn;

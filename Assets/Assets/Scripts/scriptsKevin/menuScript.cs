@@ -171,6 +171,20 @@ public class menuScript : MonoBehaviour {
             }
         }
     }
+    
+    public void weaponLog ()
+    {
+        foreach (logScript element in playerRef.logList)
+        {
+            if (element.title == "weapongLog")
+            {
+                currentState = states.readingLog;
+                beforeState = states.logsList;
+                buttonClicked = 5;
+                buttonBack.gameObject.SetActive(true);
+            }
+        }
+    }
 
     public void log4Mission()
     {
