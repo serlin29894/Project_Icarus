@@ -1,0 +1,159 @@
+fileFormatVersion: 2
+guid: 7d50878eac87d004095f99fcff0cf4c1
+timeCreated: 1464081868
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: menu_0
+    21300002: menu_1
+    21300004: menu_2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: menu_0
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 574
+        width: 746
+        height: 275
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 371, y: -129.5}
+        - {x: 373, y: -127.5}
+        - {x: 373, y: 74.5}
+        - {x: 372, y: 77.5}
+        - {x: 369, y: 79.5}
+        - {x: 369, y: 80.5}
+        - {x: 316, y: 134.5}
+        - {x: 309, y: 137.5}
+        - {x: -363, y: 137.5}
+        - {x: -370, y: 132.5}
+        - {x: -370, y: 131.5}
+        - {x: -372, y: 130.5}
+        - {x: -373, y: 127.5}
+        - {x: -373, y: -74.5}
+        - {x: -370, y: -78.5}
+        - {x: -370, y: -79.5}
+        - {x: -316, y: -134.5}
+        - {x: -309, y: -137.5}
+        - {x: 362, y: -137.5}
+        - {x: 367, y: -135.5}
+        - {x: 371, y: -130.5}
+    - name: menu_1
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 278
+        width: 746
+        height: 275
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 371, y: -129.5}
+        - {x: 373, y: -127.5}
+        - {x: 373, y: 74.5}
+        - {x: 372, y: 77.5}
+        - {x: 369, y: 79.5}
+        - {x: 369, y: 80.5}
+        - {x: 316, y: 134.5}
+        - {x: 309, y: 137.5}
+        - {x: -363, y: 137.5}
+        - {x: -370, y: 132.5}
+        - {x: -370, y: 131.5}
+        - {x: -372, y: 130.5}
+        - {x: -373, y: 127.5}
+        - {x: -373, y: -74.5}
+        - {x: -370, y: -78.5}
+        - {x: -370, y: -79.5}
+        - {x: -316, y: -134.5}
+        - {x: -309, y: -137.5}
+        - {x: 362, y: -137.5}
+        - {x: 367, y: -135.5}
+        - {x: 371, y: -130.5}
+      - - {x: -283, y: -67.5}
+        - {x: -303, y: -47.5}
+        - {x: -303, y: -45.5}
+        - {x: -304, y: -44.5}
+        - {x: -304, y: 68.5}
+        - {x: 281, y: 68.5}
+        - {x: 302, y: 47.5}
+        - {x: 304, y: 44.5}
+        - {x: 304, y: -67.5}
+        - {x: 303, y: -68.5}
+        - {x: -278, y: -68.5}
+        - {x: -279, y: -67.5}
+    - name: menu_2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 696
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -348, y: 112.5}
+        - {x: -348, y: -66.5}
+        - {x: -302, y: -112.5}
+        - {x: 348, y: -112.5}
+        - {x: 348, y: 67.5}
+        - {x: 303, y: 112.5}
+      - - {x: -329, y: -55.5}
+        - {x: -329, y: 92.5}
+        - {x: 292, y: 92.5}
+        - {x: 328, y: 56.5}
+        - {x: 328, y: -92.5}
+        - {x: -292, y: -92.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
