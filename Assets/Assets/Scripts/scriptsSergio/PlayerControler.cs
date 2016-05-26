@@ -87,7 +87,7 @@ public class PlayerControler : MonoBehaviour {
 
     void Update()
     {
-        Debug.DrawLine(transform.position, Vector3.right * 10, Color.black);
+        //Debug.DrawLine(transform.position, Vector3.right * 10, Color.black);
 
         #region Movment control
 
