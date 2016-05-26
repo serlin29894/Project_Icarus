@@ -53,7 +53,7 @@ public class pipeScript : MonoBehaviour
                     //this.gameObject.transform.position = colliderRight.collidingPipeRight.spawnLeft.transform.position;
                     vector.y = colliderRight.collidingPipeRight.transform.position.y;
                     vector.z = colliderRight.collidingPipeRight.transform.position.z;
-                    vector.x = colliderRight.collidingPipeRight.transform.position.x +(this.gameObject.GetComponent <MeshRenderer>().bounds.size.x/2 + colliderRight.collidingPipeRight.GetComponent <MeshRenderer>().bounds.size.x/2);
+                    vector.x = colliderRight.collidingPipeRight.transform.position.x -(this.gameObject.GetComponent <MeshRenderer>().bounds.size.x/2 + colliderRight.collidingPipeRight.GetComponent <MeshRenderer>().bounds.size.x/2);
                     this.gameObject.transform.position = vector;
 
                     this.GetComponent<Rigidbody>().isKinematic = true;
@@ -72,8 +72,7 @@ public class pipeScript : MonoBehaviour
             this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
             //TIENE ENERGIA LA PIPE?
-            if (!isThisPipeStatic)
-            {
+            
                 if (colliderLeft.collidingPipeLeft != null)
                 {
                     if (colliderLeft.collidingPipeLeft.havePower)
@@ -89,7 +88,7 @@ public class pipeScript : MonoBehaviour
                         havePower = true;
                     }
                 }
-            }
+            
         }
 
 
