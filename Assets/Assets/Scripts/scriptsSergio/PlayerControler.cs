@@ -55,6 +55,7 @@ public class PlayerControler : MonoBehaviour {
 
     #endregion
 
+    private bool pepe;
 
 
     // Use this for initialization
