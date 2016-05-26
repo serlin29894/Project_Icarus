@@ -108,9 +108,7 @@ public class menuScript : MonoBehaviour {
             background.SetActive(false);
             menu.SetActive(false);
         }
-	}
-
-    
+	}    
 
 
     //Buttons

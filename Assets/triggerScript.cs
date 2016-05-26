@@ -5,9 +5,13 @@ public class triggerScript : MonoBehaviour
 {
     public pipeScript collidingPipeLeft;
     public pipeScript collidingPipeRight;
+    public pipeScript collidingPipeUp;
+    public pipeScript collidingPipeDown;
     public pipeScript ownPipe;
     public bool isTriggerRight;
     public bool isTriggerLeft;
+    public bool isTriggerUp;
+    public bool isTriggerDown;
 
     void Start()
     {
@@ -28,8 +32,19 @@ public class triggerScript : MonoBehaviour
                 ownPipe.isInContactRight = true;
                 collidingPipeRight = col.gameObject.GetComponent<pipeScript>();
             }
+            if(isTriggerUp && !ownPipe.upAttached)
+            {
+                ownPipe.isInContactUp = true;
+                collidingPipeUp = col.gameObject.GetComponent<pipeScript>();
+            }
+            if (isTriggerDown && !ownPipe.downAttached)
+            {
+                ownPipe.isInContactDown = false;
+                collidingPipeDown = col.gameObject.GetComponent<pipeScript>();
+            }
         }
     }
+
     void OnTriggerExit(Collider col)
     {
         if (col.gameObject.tag == "PipeLine")
