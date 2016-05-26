@@ -21,8 +21,7 @@ public class menuScript : MonoBehaviour {
     }
 
     states beforeState;
-    states currentState;
-	
+    states currentState;	
 
     void Start ()
     {
@@ -33,7 +32,6 @@ public class menuScript : MonoBehaviour {
 	void Update () 
     {
         Debug.Log(currentState);
-        Debug.Log(playerRef.isOnMenu);
         if (playerRef.isOnMenu)
         {
             Time.timeScale = 0;
@@ -46,6 +44,7 @@ public class menuScript : MonoBehaviour {
                 logsRef.SetActive(false);
                 Cursor.visible = true;
             }
+
             if (currentState == states.logsList)
             {
                 menu.SetActive(false);
@@ -70,10 +69,9 @@ public class menuScript : MonoBehaviour {
                     {
                         buttonLog1.interactable = true;
                     }
-                }
-
-                
+                }               
             }
+
             if (currentState== states.readingLog)
             {
                 menu.SetActive(false);
