@@ -124,6 +124,11 @@ public class PlayerControler : MonoBehaviour {
             GravitonWeaponEquip = !GravitonWeaponEquip;
         }
 
+        if ( HaveObject && Input.GetKeyDown(KeyCode.W) )
+        {
+            TargetWeapon.transform.Rotate(new Vector3(0,90,0));
+        }
+
 
         #endregion
 
@@ -442,6 +447,8 @@ public class PlayerControler : MonoBehaviour {
             //Camera.main.GetComponent<SeguimientoCamara>().LimitsCamera = col.GetComponent<ZoneValues>();
         }
     }
-  
+
+   
+ 
 
 }

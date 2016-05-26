@@ -16,7 +16,7 @@ public class ObjectsBehavior : MonoBehaviour {
 	
 	}
 	
-	// Update is called once per frame
+	
 	void Update ()
     {
        if (takeit)
@@ -37,38 +37,23 @@ public class ObjectsBehavior : MonoBehaviour {
         if (col.gameObject.layer == 8)
         {
             takeit = false;
-
-           // if (MyRigidbody.velocity.x < 0.1)
-           // {
-           //     MyRigidbody.isKinematic = true;
-           // }
-           // 
-           // Debug.Log("tyu");
-
         }
+
+
+        if (takeit)
+        {
+            ContactPoint contact = col.contacts[0];
+            //MyRigidbody.AddForce()
+        }
+
     }
 
-  /*  public void OnCollisionStay(Collision col)
-    {
-        if (col.gameObject.layer == 8)
-        {
-            if (MyRigidbody.velocity.x < 0.1)
-            {
-                MyRigidbody.isKinematic = true;
-            }
-
-            Debug.Log("tyu");
-
-        }
-    }*/
 
     public void OnCollisionExit(Collision col)
     {
         if (col.gameObject.layer ==  8)
         {
             takeit = true;
-
-            //MyRigidbody.isKinematic = false;
 
         }
     }
