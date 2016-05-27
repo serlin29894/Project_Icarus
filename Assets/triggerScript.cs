@@ -12,6 +12,10 @@ public class triggerScript : MonoBehaviour
     public bool isTriggerLeft;
     public bool isTriggerUp;
     public bool isTriggerDown;
+    public bool isInLeft;
+    public bool isInRight;
+    public bool isInUp;
+    public bool isInDown;
 
     void Start()
     {
