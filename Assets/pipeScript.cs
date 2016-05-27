@@ -3,7 +3,8 @@ using System.Collections;
 
 public class pipeScript : MonoBehaviour
 {
-    //SET UP DOWN LOGIC 
+    //TO DO:
+    //SET UNITY FUNCTIONS CLICK TO WORK WITH UP AND DOWN LOGIC
 
     public bool isAttachedToAnotherPipe;
     public bool leftAttached;
@@ -261,8 +262,7 @@ public class pipeScript : MonoBehaviour
         {
             this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
-            //TIENE ENERGIA LA PIPE?
-
+            //DO THE PIPE HAS ENERGY?
             if (colliderLeft.collidingPipeLeft != null)
             {
                 if (colliderLeft.collidingPipeLeft.havePower)
@@ -278,7 +278,6 @@ public class pipeScript : MonoBehaviour
                     havePower = true;
                 }
             }
-
         }
     }
 
@@ -288,7 +287,7 @@ public class pipeScript : MonoBehaviour
     {
         if (isBeingClicked && !isThisPipeStatic)
         {
-            if (rightAttached || leftAttached)
+            if (rightAttached || leftAttached || upAttached || downAttached)
             {
                 isAttachedToAnotherPipe = false;
                 havePower = false;
@@ -337,6 +336,8 @@ public class pipeScript : MonoBehaviour
 
                 leftAttached = false;
                 rightAttached = false;
+                upAttached = false;
+                downAttached = false;
                 this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             }
         }
@@ -357,10 +358,6 @@ public class pipeScript : MonoBehaviour
         if (!rightAttached || !leftAttached)
             isBeingClicked = false;
     }
-
-
-
-
 
     //FALTA AÑADIR EL SISTEMA DE PARTICULAS: IF HAVEPOWER && ISATTACHEDTOANOTHERPIPE && !LEFTATTACHED || !RIGHTATTACHED -> EJECUTA SISTEMA DE PARTICULAS EN EL LEFTATTACHED O RIGHTATTACHED QUE TENGA VALOR FALSE
 }
