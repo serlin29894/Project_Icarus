@@ -3,8 +3,10 @@ using System.Collections;
 
 public class pipeScript : MonoBehaviour
 {
-    //TO DO:
-    //SET UNITY FUNCTIONS CLICK TO WORK WITH UP AND DOWN LOGIC
+    //TO DO: 
+    //PASS THE ENERGY THROUGH THE LAST PIPE
+    //PUT PARTICLES
+    //DETACH PIPES WHEN ALL CONNECTED
 
     public bool isAttachedToAnotherPipe;
     public bool leftAttached;
@@ -22,6 +24,7 @@ public class pipeScript : MonoBehaviour
     public triggerScript colliderLeft;
     public triggerScript colliderRight;
 
+    int counter;
     Vector3 vector;
 
 
@@ -43,59 +46,11 @@ public class pipeScript : MonoBehaviour
 
 
     //FUNCTIONS
-    void setLocationOfTriggers ()
+    void setLocationOfTriggers()
     {
-        //horizontal
-        if (colliderLeft.transform.TransformPoint(colliderLeft.transform.localPosition).x > this.gameObject.transform.position.x && colliderLeft.transform.TransformPoint(colliderLeft.transform.localPosition).y == colliderRight.transform.TransformPoint(colliderRight.transform.localPosition).y)
-        {
-            colliderLeft.isTriggerLeft = false;
-            colliderLeft.isTriggerRight = true;
-
-            colliderRight.isTriggerLeft = true;
-            colliderRight.isTriggerRight = false;
-        }
-        else if (colliderLeft.transform.TransformPoint(colliderLeft.transform.localPosition).x < this.gameObject.transform.position.x && colliderLeft.transform.TransformPoint(colliderLeft.transform.localPosition).y == colliderRight.transform.TransformPoint(colliderRight.transform.localPosition).y)
-        {
-            colliderLeft.isTriggerLeft = true;
-            colliderLeft.isTriggerRight = false;
-
-            colliderRight.isTriggerLeft = false;
-            colliderRight.isTriggerRight = true;
-        }
-        else
-        {
-            colliderLeft.isTriggerLeft = false;
-            colliderLeft.isTriggerRight = false;
-
-            colliderRight.isTriggerLeft = false;
-            colliderRight.isTriggerRight = false;
-        }
-
-        //vertical
-        if (colliderLeft.transform.TransformPoint(colliderLeft.transform.localPosition).y > this.gameObject.transform.position.y && colliderLeft.transform.TransformPoint(colliderLeft.transform.localPosition).x == colliderRight.transform.TransformPoint(colliderRight.transform.localPosition).x)
-        {
-            colliderLeft.isTriggerUp = true;
-            colliderLeft.isTriggerDown = false;
-
-            colliderRight.isTriggerUp = false;
-            colliderRight.isTriggerDown = true; ;
-        }
-        else if (colliderLeft.transform.TransformPoint(colliderLeft.transform.localPosition).y < this.gameObject.transform.position.y && colliderLeft.transform.TransformPoint(colliderLeft.transform.localPosition).x == colliderRight.transform.TransformPoint(colliderRight.transform.localPosition).x)
-        {
-            colliderLeft.isTriggerUp = false;
-            colliderLeft.isTriggerDown = true;
-
-            colliderRight.isTriggerUp = true;
-            colliderRight.isTriggerDown = false;
-        }
-        else
-        {
-            colliderLeft.isTriggerUp = false;
-            colliderLeft.isTriggerDown = false;
-
-            colliderRight.isTriggerUp = false;
-            colliderRight.isTriggerDown = false;
-        }
+        colliderLeft.setLocationOfThisTrigger();
+        colliderRight.setLocationOfThisTrigger();
+        //colliderExtraque tendra la de tres picos;
     }
 
 
@@ -256,107 +211,127 @@ public class pipeScript : MonoBehaviour
 
 
 
-    void attachedLogic ()
+    void attachedLogic()
     {
         if (isAttachedToAnotherPipe && !isBeingClicked)
         {
             this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
             //DO THE PIPE HAS ENERGY?
-            if (colliderLeft.collidingPipeLeft != null)
+            //HORIZONTAL
+            if (colliderLeft.isTriggerLeft && colliderLeft.collidingPipeLeft != null && colliderLeft.collidingPipeLeft.havePower)
             {
-                if (colliderLeft.collidingPipeLeft.havePower)
-                {
-                    havePower = true;
-                }
+                havePower = true;
+            }
+            else if (colliderLeft.isTriggerRight && colliderLeft.collidingPipeRight != null && colliderLeft.collidingPipeRight.havePower)
+            {
+                havePower = true;
+            }
+            else if (colliderLeft.isTriggerUp && colliderLeft.collidingPipeUp != null && colliderLeft.collidingPipeUp.havePower)
+            {
+                havePower = true;
+            }
+            else if (colliderLeft.isTriggerDown && colliderLeft.collidingPipeDown != null && colliderLeft.collidingPipeDown.havePower)
+            {
+                havePower = true;
             }
 
-            if (colliderRight.collidingPipeRight != null)
+            //VERTICAL
+            else if (colliderRight.isTriggerLeft && colliderRight.collidingPipeLeft != null && colliderRight.collidingPipeLeft.havePower)
             {
-                if (colliderRight.collidingPipeRight.havePower)
-                {
-                    havePower = true;
-                }
+                havePower = true;
+            }
+            else if (colliderRight.isTriggerRight && colliderRight.collidingPipeRight != null && colliderRight.collidingPipeRight.havePower)
+            {
+                havePower = true;
+            }
+            else if (colliderRight.isTriggerUp && colliderRight.collidingPipeUp != null && colliderRight.collidingPipeUp.havePower)
+            {
+                havePower = true;
+            }
+            else if (colliderRight.isTriggerDown && colliderRight.collidingPipeDown != null && colliderRight.collidingPipeDown.havePower)
+            {
+                havePower = true;
             }
         }
     }
 
 
 
-    void ifItsAttachedAndClicked ()
+    void ifItsAttachedAndClicked()
     {
         if (isBeingClicked && !isThisPipeStatic)
         {
-            if (rightAttached || leftAttached || upAttached || downAttached)
+            isAttachedToAnotherPipe = false;
+            havePower = false;
+            //MAKE COLLIDING PIPES VARIABLES FALSE
+            #region horizontal
+            if (leftAttached && colliderLeft.isTriggerLeft)
             {
-                isAttachedToAnotherPipe = false;
-                havePower = false;
-
-                //MAKE COLLIDING PIPES VARIABLES FALSE
-                #region horizontal
-                if (leftAttached && colliderLeft.isTriggerLeft)
-                {
-                    colliderLeft.collidingPipeLeft.rightAttached = false;
-                }
-                else if (leftAttached && colliderRight.isTriggerLeft)
-                {
-                    colliderRight.collidingPipeLeft.rightAttached = false;
-                }
-
-                if (rightAttached && colliderRight.isTriggerRight)
-                {
-                    colliderRight.collidingPipeRight.leftAttached = false;
-                }
-                else if (rightAttached && colliderLeft.isTriggerRight)
-                {
-                    colliderLeft.collidingPipeRight.leftAttached = false;
-                }
-                #endregion
-
-                #region vertical
-                if (upAttached && colliderLeft.isTriggerUp)
-                {
-                    colliderLeft.collidingPipeUp.downAttached = false;
-                }
-                else if (upAttached && colliderRight.isTriggerUp)
-                {
-                    colliderRight.collidingPipeUp.downAttached = false;
-                }
-
-                if (downAttached && colliderRight.isTriggerDown)
-                {
-                    colliderRight.collidingPipeDown.upAttached = false;
-                }
-                else if (downAttached && colliderLeft.isTriggerDown)
-                {
-                    colliderLeft.collidingPipeDown.upAttached = false;
-                }
-                #endregion
-                //---
-
-                leftAttached = false;
-                rightAttached = false;
-                upAttached = false;
-                downAttached = false;
-                this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                colliderLeft.collidingPipeLeft.rightAttached = false;
             }
+            else if (leftAttached && colliderRight.isTriggerLeft)
+            {
+                colliderRight.collidingPipeLeft.rightAttached = false;
+            }
+
+            if (rightAttached && colliderRight.isTriggerRight)
+            {
+                colliderRight.collidingPipeRight.leftAttached = false;
+            }
+            else if (rightAttached && colliderLeft.isTriggerRight)
+            {
+                colliderLeft.collidingPipeRight.leftAttached = false;
+            }
+            #endregion
+
+            #region vertical
+            if (upAttached && colliderLeft.isTriggerUp)
+            {
+                colliderLeft.collidingPipeUp.downAttached = false;
+            }
+            else if (upAttached && colliderRight.isTriggerUp)
+            {
+                colliderRight.collidingPipeUp.downAttached = false;
+            }
+
+            if (downAttached && colliderRight.isTriggerDown)
+            {
+                colliderRight.collidingPipeDown.upAttached = false;
+            }
+            else if (downAttached && colliderLeft.isTriggerDown)
+            {
+                colliderLeft.collidingPipeDown.upAttached = false;
+            }
+            #endregion
+            //---
+
+            leftAttached = false;
+            rightAttached = false;
+            upAttached = false;
+            downAttached = false;
+            this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         }
-    }    
-   
+    }
+
 
 
 
     //FUNCTIONS UNITY
     void OnMouseDown()
     {
-        if (!rightAttached || !leftAttached)
+        if (!((rightAttached && leftAttached) || (rightAttached && upAttached) || (rightAttached && downAttached) || (leftAttached && rightAttached) || (leftAttached && upAttached) || (leftAttached && downAttached) || (upAttached && rightAttached) || (upAttached && downAttached) || (upAttached && leftAttached) || (downAttached && upAttached) || (downAttached && leftAttached) || (downAttached && rightAttached)))
+        {
             isBeingClicked = true;
+        }
     }
 
     void OnMouseUp()
     {
-        if (!rightAttached || !leftAttached)
+        if (!((rightAttached && leftAttached) || (rightAttached && upAttached) || (rightAttached && downAttached) || (leftAttached && rightAttached) || (leftAttached && upAttached) || (leftAttached && downAttached) || (upAttached && rightAttached) || (upAttached && downAttached) || (upAttached && leftAttached) || (downAttached && upAttached) || (downAttached && leftAttached) || (downAttached && rightAttached)))
+        {
             isBeingClicked = false;
+        }
     }
 
     //FALTA AÑADIR EL SISTEMA DE PARTICULAS: IF HAVEPOWER && ISATTACHEDTOANOTHERPIPE && !LEFTATTACHED || !RIGHTATTACHED -> EJECUTA SISTEMA DE PARTICULAS EN EL LEFTATTACHED O RIGHTATTACHED QUE TENGA VALOR FALSE
