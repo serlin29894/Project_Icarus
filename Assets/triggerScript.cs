@@ -21,27 +21,32 @@ public class triggerScript : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "PipeLine")
+        if (col.gameObject.tag == "PipeLine" && col.gameObject.GetComponent <pipeScript> () != null)
         {
-            if (isTriggerLeft && !ownPipe.leftAttached && col.gameObject.GetComponent <pipeScript>().colliderLeft.isTriggerLeft || col.gameObject.GetComponent <pipeScript>().colliderRight.isTriggerLeft)
-            {                
-                ownPipe.isInContactLeft = true;
-                collidingPipeLeft = col.gameObject.GetComponent<pipeScript>();
-            }
-            if (isTriggerRight && !ownPipe.rightAttached && col.gameObject.GetComponent<pipeScript>().colliderLeft.isTriggerRight || col.gameObject.GetComponent<pipeScript>().colliderRight.isTriggerRight)
+            if (col.gameObject.GetComponent<pipeScript>().isAttachedToAnotherPipe)
             {
-                ownPipe.isInContactRight = true;
-                collidingPipeRight = col.gameObject.GetComponent<pipeScript>();
-            }
-            if(isTriggerUp && !ownPipe.upAttached && col.gameObject.GetComponent<pipeScript>().colliderLeft.isTriggerDown || col.gameObject.GetComponent<pipeScript>().colliderRight.isTriggerDown)
-            {
-                ownPipe.isInContactUp = true;
-                collidingPipeUp = col.gameObject.GetComponent<pipeScript>();
-            }
-            if (isTriggerDown && !ownPipe.downAttached && col.gameObject.GetComponent<pipeScript>().colliderLeft.isTriggerUp || col.gameObject.GetComponent<pipeScript>().colliderRight.isTriggerUp)
-            {
-                ownPipe.isInContactDown = true;
-                collidingPipeDown = col.gameObject.GetComponent<pipeScript>();
+                Debug.Log(isTriggerLeft);
+                if (isTriggerLeft && !ownPipe.leftAttached && (col.gameObject.GetComponent<pipeScript>().colliderLeft.isTriggerRight || col.gameObject.GetComponent<pipeScript>().colliderRight.isTriggerRight))
+                {
+                    Debug.Log(isTriggerLeft);
+                    ownPipe.isInContactLeft = true;
+                    collidingPipeLeft = col.gameObject.GetComponent<pipeScript>();
+                }
+                if (isTriggerRight && !ownPipe.rightAttached && (col.gameObject.GetComponent<pipeScript>().colliderLeft.isTriggerLeft || col.gameObject.GetComponent<pipeScript>().colliderRight.isTriggerLeft))
+                {
+                    ownPipe.isInContactRight = true;
+                    collidingPipeRight = col.gameObject.GetComponent<pipeScript>();
+                }
+                if (isTriggerUp && !ownPipe.upAttached && (col.gameObject.GetComponent<pipeScript>().colliderLeft.isTriggerDown || col.gameObject.GetComponent<pipeScript>().colliderRight.isTriggerDown))
+                {
+                    ownPipe.isInContactUp = true;
+                    collidingPipeUp = col.gameObject.GetComponent<pipeScript>();
+                }
+                if (isTriggerDown && !ownPipe.downAttached && (col.gameObject.GetComponent<pipeScript>().colliderLeft.isTriggerUp || col.gameObject.GetComponent<pipeScript>().colliderRight.isTriggerUp))
+                {
+                    ownPipe.isInContactDown = true;
+                    collidingPipeDown = col.gameObject.GetComponent<pipeScript>();
+                }
             }
         }
     }
@@ -52,16 +57,24 @@ public class triggerScript : MonoBehaviour
         if (this.transform.TransformPoint (this.transform.localPosition).x > ownPipe.transform.position.x && Mathf.Abs (this.transform.TransformPoint(this.transform.localPosition).y - ownPipe.transform.position.y) < Mathf.Abs (this.transform.TransformPoint(this.transform.localPosition).x - ownPipe.transform.position.x))
         {
             isTriggerRight = true;
+            collidingPipeLeft = null;
+            collidingPipeUp = null;
+            collidingPipeDown = null;            
             isTriggerLeft = false;
         }
         else if (this.transform.TransformPoint(this.transform.localPosition).x < ownPipe.transform.position.x && Mathf.Abs(this.transform.TransformPoint(this.transform.localPosition).y - ownPipe.transform.position.y) < Mathf.Abs(this.transform.TransformPoint(this.transform.localPosition).x - ownPipe.transform.position.x))
         {
             isTriggerRight = false;
+            collidingPipeRight = null;
+            collidingPipeUp = null;
+            collidingPipeDown = null;
             isTriggerLeft = true;            
         }
         else
         {
             isTriggerRight = false;
+            collidingPipeLeft = null;
+            collidingPipeRight = null;
             isTriggerLeft = false;
         }
 
@@ -69,11 +82,17 @@ public class triggerScript : MonoBehaviour
         if (this.transform.TransformPoint(this.transform.localPosition).y > ownPipe.transform.position.y && Mathf.Abs(this.transform.TransformPoint(this.transform.localPosition).x - ownPipe.transform.position.x) < Mathf.Abs(this.transform.TransformPoint(this.transform.localPosition).y - ownPipe.transform.position.y))
         {
             isTriggerUp = true;
+            collidingPipeLeft = null;
+            collidingPipeRight = null;
+            collidingPipeDown = null;
             isTriggerDown = false;
         }
         else if (this.transform.TransformPoint(this.transform.localPosition).y < ownPipe.transform.position.y && Mathf.Abs(this.transform.TransformPoint(this.transform.localPosition).x - ownPipe.transform.position.x) < Mathf.Abs(this.transform.TransformPoint(this.transform.localPosition).y - ownPipe.transform.position.y))
         {
             isTriggerUp = false;
+            collidingPipeUp = null;
+            collidingPipeRight = null;
+            collidingPipeLeft = null;
             isTriggerDown = true;
         }
         else
@@ -85,21 +104,21 @@ public class triggerScript : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == "PipeLine")
+        if (col.gameObject.tag == "PipeLine" && col.gameObject != this.gameObject.transform.parent.gameObject)
         {
-            if (isTriggerLeft)
+            if (isTriggerLeft && col.gameObject.GetComponent<pipeScript>() == collidingPipeLeft)
             {
                 ownPipe.isInContactLeft = false;
             }
-            if (isTriggerRight)
+            if (isTriggerRight && col.gameObject.GetComponent<pipeScript>() == collidingPipeRight)
             {
                 ownPipe.isInContactRight = false;
             }
-            if (isTriggerDown)
+            if (isTriggerDown && col.gameObject.GetComponent<pipeScript>() == collidingPipeDown)
             {
                 ownPipe.isInContactDown = false;
             }
-            if (isTriggerUp)
+            if (isTriggerUp && col.gameObject.GetComponent <pipeScript> () == collidingPipeUp)
             {
                 ownPipe.isInContactUp = false;
             }

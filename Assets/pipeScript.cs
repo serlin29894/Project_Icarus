@@ -27,7 +27,6 @@ public class pipeScript : MonoBehaviour
     int counter;
     Vector3 vector;
 
-
     // Update is called once per frame
     void Update()
     {
@@ -42,7 +41,11 @@ public class pipeScript : MonoBehaviour
 
         //SI ESTA PIPE ESTA ENGANCHADA SOLO POR UN LADO Y CLICAN EN ELLA, DESENGANCHARLA
         ifItsAttachedAndClicked();
+
+        //CONTROLA QUE NO ESTE EN CONTACTO CUAND NO LO ESTA
+        //controlIsInContact();
     }
+
 
 
     //FUNCTIONS
@@ -51,6 +54,26 @@ public class pipeScript : MonoBehaviour
         colliderLeft.setLocationOfThisTrigger();
         colliderRight.setLocationOfThisTrigger();
         //colliderExtraque tendra la de tres picos;
+    }
+
+    void controlIsInContact()
+    {
+        if (!colliderLeft.isTriggerDown || !colliderRight.isTriggerDown)
+        {
+            isInContactDown = false;
+        }
+        if (!colliderRight.isTriggerLeft || !colliderLeft.isTriggerLeft)
+        {
+            isInContactLeft = false;
+        }
+        if (!colliderRight.isTriggerRight || !colliderLeft.isTriggerRight)
+        {
+            isInContactRight = false;
+        }
+        if (!colliderRight.isTriggerUp || !colliderLeft.isTriggerUp)
+        {
+            isInContactUp = false;
+        } 
     }
 
 

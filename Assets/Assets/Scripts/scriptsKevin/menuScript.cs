@@ -98,44 +98,7 @@ public class menuScript : MonoBehaviour {
                 menu.SetActive(false);
                 logsRef.SetActive(false);
                 Cursor.visible = true;
-                
-                    foreach (logScript element in playerRef.logList)
-                    {
-                        try
-                        {
-                            if (element.title == "weaponLog")
-                            {
-                                textToShow.gameObject.SetActive(true);
-                                textToShow.text = element.textInLog;
-                            }
-                            if (element.title == "log1")
-                            {
-                                textToShow.gameObject.SetActive(true);
-                                textToShow.text = element.textInLog;
-                            }                            
-                            if (element.title =="log2")
-                            {
-                                textToShow.gameObject.SetActive(true);
-                                textToShow.text = element.textInLog;
-                            }
-                            if (element.title == "log3")
-                            {
-                                textToShow.gameObject.SetActive(true);
-                                textToShow.text = element.textInLog;
-                            }
-                            if (element.title == "log4")
-                            {
-                                textToShow.gameObject.SetActive(true);
-                                textToShow.text = element.textInLog;
-                            }
-                        }
-
-                        catch
-                        {
-                            
-                        }
-                    }
-                
+                textToShow.gameObject.SetActive(true);                
             }
         }
 
@@ -173,6 +136,7 @@ public class menuScript : MonoBehaviour {
             {
                 currentState = states.readingLog;
                 beforeState = states.logsList;
+                textToShow.text = element.textInLog;
                 buttonBack.gameObject.SetActive(true);
                 playerRef.isOnMenu = true;
             }
@@ -187,6 +151,7 @@ public class menuScript : MonoBehaviour {
             {
                 currentState = states.readingLog;
                 beforeState = states.logsList;
+                textToShow.text = element.textInLog;
                 buttonBack.gameObject.SetActive(true);
                 playerRef.isOnMenu = true;
             }
@@ -201,6 +166,7 @@ public class menuScript : MonoBehaviour {
             {
                 currentState = states.readingLog;
                 beforeState = states.logsList;
+                textToShow.text = element.textInLog;
                 buttonBack.gameObject.SetActive(true);
                 playerRef.isOnMenu = true;
             }
@@ -215,6 +181,7 @@ public class menuScript : MonoBehaviour {
             {
                 currentState = states.readingLog;
                 beforeState = states.logsList;
+                textToShow.text = element.textInLog;
                 buttonBack.gameObject.SetActive(true);
                 playerRef.isOnMenu = true;
             }
@@ -229,6 +196,7 @@ public class menuScript : MonoBehaviour {
             {
                 currentState = states.readingLog;
                 beforeState = states.logsList;
+                textToShow.text = element.textInLog;
                 buttonBack.gameObject.SetActive(true);
                 playerRef.isOnMenu = true;
             }
