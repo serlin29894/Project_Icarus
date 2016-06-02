@@ -20,6 +20,9 @@ public class PlayerControler : MonoBehaviour {
     public List<logScript> logList;
     public bool isOnMenu;
     public bool isInteracting;
+    public GameObject arm_Move;
+    public GameObject arm;
+    public GameObject weapon;
    // public bool isOnStairs;
 
     #region Private var
@@ -87,8 +90,7 @@ public class PlayerControler : MonoBehaviour {
 
     void Update()
     {
-        //Debug.DrawLine(transform.position, Vector3.right * 10, Color.black);
-
+        
         #region Movment control
 
         axisHorizontal = Input.GetAxis("Horizontal");
@@ -110,7 +112,8 @@ public class PlayerControler : MonoBehaviour {
         //}
 
 
-        //Debug.DrawLine(new Vector3(transform.position.x, transform.position.y,transform.position.z), new Vector3 (transform.position.x , transform.position.y , transform.position.z * 10), Color.blue);
+     
+
 
         #region Crounch
         CrounchInput();
@@ -142,7 +145,7 @@ public class PlayerControler : MonoBehaviour {
             if (Input.GetMouseButtonDown(0))
             {
                 CameraMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
-                MousePos = CameraMouse.origin + CameraMouse.direction * (transform.position - Camera.main.transform.position).magnitude;
+                MousePos = CameraMouse.origin /*+ CameraMouse.direction*/ * (transform.position - Camera.main.transform.position).magnitude;
 
                 if (Physics.Raycast(CameraMouse, out TargetWeapon, Mathf.Infinity, 1 << 10)); 
                 {
@@ -215,8 +218,26 @@ public class PlayerControler : MonoBehaviour {
             Cursor.visible = false;
         }
         #endregion
-        
-        
+
+        if (GravitonWeaponEquip && HaveObject )
+        {
+            arm_Move.SetActive(true);
+            arm.SetActive(false);
+            weapon.SetActive(false);
+            var direction = MousePos - arm_Move.transform.position;
+            direction.Normalize();
+            var rotAmaunt = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            arm_Move.transform.rotation = Quaternion.Euler(0, 0, rotAmaunt + 90);
+            
+         }
+        else
+        {
+            arm_Move.SetActive(false);
+            arm.SetActive(true);
+            weapon.SetActive(true);
+        }
+
+
 
     }
 
@@ -358,24 +379,23 @@ public class PlayerControler : MonoBehaviour {
 
     public void Jump()
     {
+        
         Grounded = false;
-        Collider [] GroundColliders = Physics.OverlapSphere(this.transform.position - new Vector3(0,MyCollider.height,0), 0.2f/*,1<<8*/);
-
-        //Debug.Log(new Vector3(this.transform.position.x, this.transform.position.y - MyCollider.height , this.transform.position.z));
-        //Debug.DrawLine(new Vector3(this.transform.position.x, this.transform.position.y - MyCollider.height, this.transform.position.z), new Vector3(this.transform.position.x * 4, this.transform.position.y - MyCollider.height, this.transform.position.z), Color.red);
-
+        Collider [] GroundColliders = Physics.OverlapSphere(this.transform.position - new Vector3(0, MyCollider.bounds.size.y, 0), 0.2f);
+        //Debug.DrawLine(this.transform.position - new Vector3(0, MyCollider.bounds.size.y, 0), this.transform.position - new Vector3(0, MyCollider.bounds.size.y, 0) + new Vector3(10,10,0), Color.black);
+        Debug.Log(this.transform.position - new Vector3(0, MyCollider.bounds.size.y, 0));
         for (int i=0; i <GroundColliders.Length; i++)
         {
             if (GroundColliders[i].gameObject != gameObject && GroundColliders[i].gameObject.tag =="Ground")
             {
                 Grounded = true;
-                //Debug.Log(GroundColliders[i]);
+                Debug.Log(Grounded);
             }
-            
         }
 
-        if (Input.GetButtonDown("Jump") &&  Grounded)
+        if (Input.GetKeyDown(KeyCode.Space) &&  Grounded)
         {
+            Debug.Log("dasda");
             MyRigidbody.velocity = new Vector3(0, JumpForce, 0);
         }
 
@@ -385,46 +405,44 @@ public class PlayerControler : MonoBehaviour {
 
     public void ChechkFacing()
     {
-        //if (!HaveObject)
-        //{
-            if (axisHorizontal > 0)
-            {
-                MySpriteRenderer.flipX = false;
-                //Puppet.flip = true;
-            }
-            else if (axisHorizontal < 0)
-            {
-                MySpriteRenderer.flipX = true;
-                //Puppet.flip = false;
+        if (!HaveObject)
+        {
+          if (axisHorizontal > 0)
+          {
+              
+              Puppet.flip = true;
+          }
+          else if (axisHorizontal < 0)
+          {
+              
+              Puppet.flip = false;
 
-            }
-       //}
-       //else
-       //{
-       //  if (Dot >= 0)
-       //  {
-       //        if (Puppet.flip  /*!MySpriteRenderer.flipX*/)
-       //        {
-       //
-       //        }
-       //        else
-       //        {
-       //            Puppet.flip = true;
-       //            //MySpriteRenderer.flipX = false;
-       //        }
-       //  }else if (Dot < 0)
-       //  {
-       //        if (!Puppet.flip/*MySpriteRenderer.flipX*/)
-       //        {
-       //
-       //        }
-       //        else
-       //        {
-       //            Puppet.flip = false;
-       //            //MySpriteRenderer.flipX = true;
-       //        }
-       //    }
-       //}
+          }
+      }
+      else
+      {
+        if (Dot >= 0)
+        {
+              if (Puppet.flip  )
+              {
+      
+              }
+              else
+              {
+                  Puppet.flip = true; 
+              }
+        }else if (Dot < 0)
+        {
+              if (!Puppet.flip)
+              {
+      
+              }
+              else
+              {
+                  Puppet.flip = false;
+              }
+          }
+      }
     }
 
     public Rigidbody GetRigidbody()

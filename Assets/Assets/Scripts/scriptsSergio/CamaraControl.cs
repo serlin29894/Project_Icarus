@@ -72,16 +72,21 @@ public class CamaraControl : MonoBehaviour {
 
         if (CanMoveRight && ( target.position.x > LI_right.position.x))
         {
-            MovmentX = Mathf.Abs(LI_right.position.x - target.position.x);
-            shadowPosition = Vector3.Lerp(shadowPosition, new Vector3(shadowPosition.x + MovmentX, shadowPosition.y, Zoom), Time.deltaTime * Camera_Speed);
+            //MovmentX = Mathf.Abs(LI_right.position.x - target.position.x);
+            //shadowPosition = Vector3.Lerp(shadowPosition, new Vector3(shadowPosition.x + MovmentX, shadowPosition.y, Zoom), Time.deltaTime * Camera_Speed);
+            shadowPosition = Vector3.Lerp(shadowPosition, new Vector3(target.position.x, shadowPosition.y, Zoom), Time.deltaTime * Camera_Speed);
+            //shadowPosition = Vector3.MoveTowards(shadowPosition, new Vector3(target.position.x, shadowPosition.y, Zoom), Camera_Speed);
             NewPosition = shadowPosition;
+
         }
 
         if (CanMoveLefht && ( target.position.x < LI_lefht.position.x))
         {
-            MovmentX = Mathf.Abs(LI_lefht.position.x - target.position.x);
-
-            shadowPosition = Vector3.Lerp(shadowPosition, new Vector3(shadowPosition.x - MovmentX, shadowPosition.y, Zoom), Time.deltaTime * Camera_Speed);
+            //MovmentX = Mathf.Abs(LI_lefht.position.x - target.position.x);
+            //
+            //shadowPosition = Vector3.Lerp(shadowPosition, new Vector3(shadowPosition.x - MovmentX, shadowPosition.y, Zoom), Time.deltaTime * Camera_Speed);
+            shadowPosition = Vector3.Lerp(shadowPosition, new Vector3(target.position.x, shadowPosition.y, Zoom), Time.deltaTime * Camera_Speed);
+            //shadowPosition = Vector3.MoveTowards(shadowPosition, new Vector3(target.position.x, shadowPosition.y, Zoom), Camera_Speed);
             NewPosition = shadowPosition;
         }
 
@@ -105,7 +110,7 @@ public class CamaraControl : MonoBehaviour {
         {
             shadowPosition = Vector3.Lerp(shadowPosition, new Vector3(shadowPosition.x, target.position.y + DistanceToGround, Zoom), Time.deltaTime * Camera_Speed);
             NewPosition = shadowPosition;
-
+        
         }
 
     }
@@ -120,6 +125,7 @@ public class CamaraControl : MonoBehaviour {
         {
             CameraFollow();
             transform.position = NewPosition;
+            //transform.position = new Vector3(target.position.x, target.position.y, Zoom);
         }
         else if (!canMove)
         {
@@ -167,6 +173,8 @@ public class CamaraControl : MonoBehaviour {
         #endregion
 
     }
+
+    
 
 
 
