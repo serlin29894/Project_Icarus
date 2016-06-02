@@ -29,6 +29,10 @@ public class triggerScript : MonoBehaviour
                 ownPipe.havePower = true;
             }
         }
+        else 
+        {
+            ownPipe.havePower = false; 
+        }
     }
 
     void OnTriggerEnter(Collider col)

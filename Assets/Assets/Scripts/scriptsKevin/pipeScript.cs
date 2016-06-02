@@ -48,13 +48,8 @@ public class pipeScript : MonoBehaviour
         attachedLogic();
 
         //SI ESTA PIPE ESTA ENGANCHADA SOLO POR UN LADO Y CLICAN EN ELLA, DESENGANCHARLA
-        ifItsAttachedAndClicked();
-
-        //CONTROLA QUE NO ESTE EN CONTACTO CUAND NO LO ESTA
-        //controlIsInContact();
+        ifItsAttachedAndClicked();       
     }
-
-
 
     //FUNCTIONS
     void setLocationOfTriggers()
@@ -63,28 +58,6 @@ public class pipeScript : MonoBehaviour
         colliderRight.setLocationOfThisTrigger();
         //colliderExtraque tendra la de tres picos;
     }
-
-    /*void controlIsInContact()
-    {
-        if (!colliderLeft.isTriggerDown || !colliderRight.isTriggerDown)
-        {
-            isInContactDown = false;
-        }
-        if (!colliderRight.isTriggerLeft || !colliderLeft.isTriggerLeft)
-        {
-            isInContactLeft = false;
-        }
-        if (!colliderRight.isTriggerRight || !colliderLeft.isTriggerRight)
-        {
-            isInContactRight = false;
-        }
-        if (!colliderRight.isTriggerUp || !colliderLeft.isTriggerUp)
-        {
-            isInContactUp = false;
-        } 
-    }*/
-
-
 
     void notAttachedLogic()
     {
@@ -444,6 +417,5 @@ public class pipeScript : MonoBehaviour
             isBeingClicked = false;
         }
     }
-
     //FALTA AÑADIR EL SISTEMA DE PARTICULAS: IF HAVEPOWER && ISATTACHEDTOANOTHERPIPE && !LEFTATTACHED || !RIGHTATTACHED -> EJECUTA SISTEMA DE PARTICULAS EN EL LEFTATTACHED O RIGHTATTACHED QUE TENGA VALOR FALSE
 }
