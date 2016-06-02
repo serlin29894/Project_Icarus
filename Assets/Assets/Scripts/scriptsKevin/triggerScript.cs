@@ -12,7 +12,8 @@ public class triggerScript : MonoBehaviour
     public bool isTriggerDown;
     public bool isTriggerLeft;
     public bool isTriggerUp;
-    
+
+    public pipeScript otherPipe;
 
     void Start()
     {
@@ -25,27 +26,36 @@ public class triggerScript : MonoBehaviour
         {
             if (col.gameObject.GetComponent<pipeScript>().isAttachedToAnotherPipe)
             {
-                Debug.Log(isTriggerLeft);
+                
+                //Debug.Log(isTriggerLeft);
                 if (isTriggerLeft && !ownPipe.leftAttached && (col.gameObject.GetComponent<pipeScript>().colliderLeft.isTriggerRight || col.gameObject.GetComponent<pipeScript>().colliderRight.isTriggerRight))
                 {
-                    Debug.Log(isTriggerLeft);
+                    //Debug.Log(isTriggerLeft);
                     ownPipe.isInContactLeft = true;
                     collidingPipeLeft = col.gameObject.GetComponent<pipeScript>();
+                    otherPipe = col.gameObject.GetComponent<pipeScript>();
+                    Debug.Log(otherPipe.gameObject.name);
                 }
                 if (isTriggerRight && !ownPipe.rightAttached && (col.gameObject.GetComponent<pipeScript>().colliderLeft.isTriggerLeft || col.gameObject.GetComponent<pipeScript>().colliderRight.isTriggerLeft))
                 {
                     ownPipe.isInContactRight = true;
                     collidingPipeRight = col.gameObject.GetComponent<pipeScript>();
+                    otherPipe = col.gameObject.GetComponent<pipeScript>();
+                    Debug.Log(otherPipe.gameObject.name);
                 }
                 if (isTriggerUp && !ownPipe.upAttached && (col.gameObject.GetComponent<pipeScript>().colliderLeft.isTriggerDown || col.gameObject.GetComponent<pipeScript>().colliderRight.isTriggerDown))
                 {
                     ownPipe.isInContactUp = true;
                     collidingPipeUp = col.gameObject.GetComponent<pipeScript>();
+                    otherPipe = col.gameObject.GetComponent<pipeScript>();
+                    Debug.Log(otherPipe.gameObject.name);
                 }
                 if (isTriggerDown && !ownPipe.downAttached && (col.gameObject.GetComponent<pipeScript>().colliderLeft.isTriggerUp || col.gameObject.GetComponent<pipeScript>().colliderRight.isTriggerUp))
                 {
                     ownPipe.isInContactDown = true;
                     collidingPipeDown = col.gameObject.GetComponent<pipeScript>();
+                    otherPipe = col.gameObject.GetComponent<pipeScript>();
+                    Debug.Log(otherPipe.gameObject.name);
                 }
             }
         }
@@ -108,18 +118,22 @@ public class triggerScript : MonoBehaviour
         {
             if (isTriggerLeft && col.gameObject.GetComponent<pipeScript>() == collidingPipeLeft)
             {
+                otherPipe = null;
                 ownPipe.isInContactLeft = false;
             }
             if (isTriggerRight && col.gameObject.GetComponent<pipeScript>() == collidingPipeRight)
             {
+                otherPipe = null;
                 ownPipe.isInContactRight = false;
             }
             if (isTriggerDown && col.gameObject.GetComponent<pipeScript>() == collidingPipeDown)
             {
+                otherPipe = null;
                 ownPipe.isInContactDown = false;
             }
             if (isTriggerUp && col.gameObject.GetComponent <pipeScript> () == collidingPipeUp)
             {
+                otherPipe = null;
                 ownPipe.isInContactUp = false;
             }
         }

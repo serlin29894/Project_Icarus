@@ -383,13 +383,12 @@ public class PlayerControler : MonoBehaviour {
         Grounded = false;
         Collider [] GroundColliders = Physics.OverlapSphere(this.transform.position - new Vector3(0, MyCollider.bounds.size.y, 0), 0.2f);
         //Debug.DrawLine(this.transform.position - new Vector3(0, MyCollider.bounds.size.y, 0), this.transform.position - new Vector3(0, MyCollider.bounds.size.y, 0) + new Vector3(10,10,0), Color.black);
-        Debug.Log(this.transform.position - new Vector3(0, MyCollider.bounds.size.y, 0));
+        //Debug.Log(this.transform.position - new Vector3(0, MyCollider.bounds.size.y, 0));
         for (int i=0; i <GroundColliders.Length; i++)
         {
             if (GroundColliders[i].gameObject != gameObject && GroundColliders[i].gameObject.tag =="Ground")
             {
                 Grounded = true;
-                Debug.Log(Grounded);
             }
         }
 
