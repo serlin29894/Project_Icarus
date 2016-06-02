@@ -64,7 +64,7 @@ public class pipeScript : MonoBehaviour
         //colliderExtraque tendra la de tres picos;
     }
 
-    void controlIsInContact()
+    /*void controlIsInContact()
     {
         if (!colliderLeft.isTriggerDown || !colliderRight.isTriggerDown)
         {
@@ -82,7 +82,7 @@ public class pipeScript : MonoBehaviour
         {
             isInContactUp = false;
         } 
-    }
+    }*/
 
 
 
@@ -310,7 +310,6 @@ public class pipeScript : MonoBehaviour
     {
         if (isAttachedToAnotherPipe && !isBeingClicked)
         {
-
             if (colliderRight.otherPipe != null)
             {
                 if (colliderRight.otherPipe.havePower == true)
@@ -326,8 +325,6 @@ public class pipeScript : MonoBehaviour
                     havePower = true;
                 }
             }
-
-
 
             this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 

@@ -20,13 +20,24 @@ public class triggerScript : MonoBehaviour
         ownPipe = this.gameObject.GetComponentInParent<pipeScript>();
     }
 
+    void Update ()
+    {
+        if (otherPipe != null)
+        {
+            if (otherPipe.havePower)
+            {
+                ownPipe.havePower = true;
+            }
+        }
+    }
+
     void OnTriggerEnter(Collider col)
     {
         if ((col.gameObject.tag == "PipeLine" && col.gameObject.GetComponent <pipeScript> () != null) || (col.gameObject.tag == "PipeLineCurve" && col.gameObject.GetComponent<pipeScript>() != null))
         {
+            otherPipe = col.gameObject.GetComponent<pipeScript>(); 
             if (col.gameObject.GetComponent<pipeScript>().isAttachedToAnotherPipe)
-            {
-                
+            {                     
                 //Debug.Log(isTriggerLeft);
                 if (isTriggerLeft && !ownPipe.leftAttached && (col.gameObject.GetComponent<pipeScript>().colliderLeft.isTriggerRight || col.gameObject.GetComponent<pipeScript>().colliderRight.isTriggerRight))
                 {
