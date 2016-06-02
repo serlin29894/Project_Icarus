@@ -20,8 +20,8 @@ public class pipeScript : MonoBehaviour
     public bool isInContactDown;
     public bool isThisPipeStatic;
     public bool havePower;
-    private float offSetX;
-    private float offSetY;
+    public float offSetX;
+    public float offSetY;
 
     public triggerScript colliderLeft;
     public triggerScript colliderRight;
@@ -31,8 +31,8 @@ public class pipeScript : MonoBehaviour
 
     void Start ()
     {
-        offSetX = 0.5f;
-        offSetY = 0.5f;
+        offSetX = 0.4f;
+        offSetY = 0.4f;
     }
 
     // Update is called once per frame
@@ -104,13 +104,11 @@ public class pipeScript : MonoBehaviour
                     vector.z = colliderLeft.collidingPipeLeft.transform.position.z;
                     vector.x = colliderLeft.collidingPipeLeft.transform.position.x + (this.gameObject.GetComponent<MeshRenderer>().bounds.size.x / 2 + colliderLeft.collidingPipeLeft.GetComponent<MeshRenderer>().bounds.size.x / 2);
                     if (this.gameObject.tag == "PipeLineCurve")
-                    {
-                        Debug.Log("here");
+                    {  
                         vector.x += offSetX;                        
                     }
                     if (colliderLeft.collidingPipeLeft.gameObject.tag == "PipeLineCurve")
                     {
-                        Debug.Log("hereToo");
                         vector.x += offSetX;
                     }
                     this.gameObject.transform.position = vector;
@@ -131,12 +129,10 @@ public class pipeScript : MonoBehaviour
                     vector.x = colliderRight.collidingPipeLeft.transform.position.x + (this.gameObject.GetComponent<MeshRenderer>().bounds.size.x / 2 + colliderRight.collidingPipeLeft.GetComponent<MeshRenderer>().bounds.size.x / 2);
                     if (this.gameObject.tag == "PipeLineCurve")
                     {
-                        Debug.Log("here");
                         vector.x += offSetX;                        
                     }
                     if (colliderRight.collidingPipeLeft.gameObject.tag == "PipeLineCurve")
                     {
-                        Debug.Log("hereToo");
                         vector.x += offSetX;
                     }
                     this.gameObject.transform.position = vector;
@@ -160,12 +156,10 @@ public class pipeScript : MonoBehaviour
                     vector.x = colliderRight.collidingPipeRight.transform.position.x - (this.gameObject.GetComponent<MeshRenderer>().bounds.size.x / 2 + colliderRight.collidingPipeRight.GetComponent<MeshRenderer>().bounds.size.x / 2);
                     if (this.gameObject.tag == "PipeLineCurve")
                     {
-                        Debug.Log("here");
                         vector.x -= offSetX;                        
                     }
                     if (colliderRight.collidingPipeRight.gameObject.tag == "PipeLineCurve")
                     {
-                        Debug.Log("hereToo");
                         vector.x -= offSetX;
                     }
                     this.gameObject.transform.position = vector;
@@ -186,12 +180,10 @@ public class pipeScript : MonoBehaviour
                     vector.x = colliderLeft.collidingPipeRight.transform.position.x - (this.gameObject.GetComponent<MeshRenderer>().bounds.size.x / 2 + colliderLeft.collidingPipeRight.GetComponent<MeshRenderer>().bounds.size.x / 2);
                     if (this.gameObject.tag == "PipeLineCurve")
                     {
-                        Debug.Log("here");
                         vector.x -= offSetX;                        
                     }
                     if (colliderLeft.collidingPipeRight.gameObject.tag == "PipeLineCurve")
                     {
-                        Debug.Log("hereToo");
                         vector.x -= offSetX;
                     }
                     this.gameObject.transform.position = vector;
@@ -215,12 +207,10 @@ public class pipeScript : MonoBehaviour
                     vector.y = colliderLeft.collidingPipeUp.transform.position.y - (this.gameObject.GetComponent<MeshRenderer>().bounds.size.y / 2 + colliderLeft.collidingPipeUp.GetComponent<MeshRenderer>().bounds.size.y / 2);
                     if (this.gameObject.tag == "PipeLineCurve")
                     {
-                        Debug.Log("here");
                         vector.y -= offSetY;                        
                     }
                     if (colliderLeft.collidingPipeUp.gameObject.tag == "PipeLineCurve")
                     {
-                        Debug.Log("hereToo");
                         vector.y -= offSetY;
                     }
                     vector.z = colliderLeft.collidingPipeUp.transform.position.z;
@@ -241,12 +231,10 @@ public class pipeScript : MonoBehaviour
                     vector.y = colliderRight.collidingPipeUp.transform.position.y - (this.gameObject.GetComponent<MeshRenderer>().bounds.size.y / 2 + colliderRight.collidingPipeUp.GetComponent<MeshRenderer>().bounds.size.y / 2);
                     if (this.gameObject.tag == "PipeLineCurve")
                     {
-                        Debug.Log("here");
                         vector.y -= offSetY;                        
                     }
                     if (colliderRight.collidingPipeUp.gameObject.tag == "PipeLineCurve")
                     {
-                        Debug.Log("hereToo");
                         vector.y -= offSetY;
                     }
                     vector.z = colliderRight.collidingPipeUp.transform.position.z;
@@ -270,12 +258,10 @@ public class pipeScript : MonoBehaviour
                     vector.y = colliderLeft.collidingPipeDown.transform.position.y + (this.gameObject.GetComponent<MeshRenderer>().bounds.size.y / 2 + colliderLeft.collidingPipeDown.GetComponent<MeshRenderer>().bounds.size.y / 2);
                     if (this.gameObject.tag == "PipeLineCurve")
                     {
-                        Debug.Log("here");
                         vector.y += offSetY;                        
                     }
                     if (colliderLeft.collidingPipeDown.gameObject.tag == "PipeLineCurve")
                     {
-                        Debug.Log("hereToo");
                         vector.y += offSetY;
                     }
                     vector.z = colliderLeft.collidingPipeDown.transform.position.z;
@@ -296,12 +282,10 @@ public class pipeScript : MonoBehaviour
                     vector.y = colliderRight.collidingPipeDown.transform.position.y + (this.gameObject.GetComponent<MeshRenderer>().bounds.size.y / 2 + colliderRight.collidingPipeDown.GetComponent<MeshRenderer>().bounds.size.y / 2);
                     if (this.gameObject.tag == "PipeLineCurve")
                     {
-                        Debug.Log("here");
                         vector.y += offSetY;                       
                     }
                     if (colliderRight.collidingPipeDown.gameObject.tag == "PipeLineCurve")
                     {
-                        Debug.Log("hereToo");
                         vector.y += offSetY;
                     }
                     vector.z = colliderRight.collidingPipeDown.transform.position.z;
@@ -326,6 +310,25 @@ public class pipeScript : MonoBehaviour
     {
         if (isAttachedToAnotherPipe && !isBeingClicked)
         {
+
+            if (colliderRight.otherPipe != null)
+            {
+                if (colliderRight.otherPipe.havePower == true)
+                {
+                    havePower = true;
+                }
+            }
+
+            if (colliderLeft.otherPipe != null)
+            {
+                if (colliderLeft.otherPipe.havePower == true)
+                {
+                    havePower = true;
+                }
+            }
+
+
+
             this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
             //DO THE PIPE HAS ENERGY?

@@ -22,7 +22,7 @@ public class triggerScript : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "PipeLine" && col.gameObject.GetComponent <pipeScript> () != null)
+        if ((col.gameObject.tag == "PipeLine" && col.gameObject.GetComponent <pipeScript> () != null) || (col.gameObject.tag == "PipeLineCurve" && col.gameObject.GetComponent<pipeScript>() != null))
         {
             if (col.gameObject.GetComponent<pipeScript>().isAttachedToAnotherPipe)
             {
@@ -114,7 +114,7 @@ public class triggerScript : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == "PipeLine" && col.gameObject != this.gameObject.transform.parent.gameObject)
+        if ((col.gameObject.tag == "PipeLine" && col.gameObject != this.gameObject.transform.parent.gameObject) || (col.gameObject.tag == "PipeLineCurve" && col.gameObject != this.gameObject.transform.parent.gameObject))
         {
             if (isTriggerLeft && col.gameObject.GetComponent<pipeScript>() == collidingPipeLeft)
             {
