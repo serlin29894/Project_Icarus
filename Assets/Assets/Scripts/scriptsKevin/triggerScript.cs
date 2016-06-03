@@ -29,7 +29,7 @@ public class triggerScript : MonoBehaviour
                 ownPipe.havePower = true;
             }
         }
-        else 
+        else if (!ownPipe.havePower)
         {
             ownPipe.havePower = false; 
         }
@@ -131,6 +131,7 @@ public class triggerScript : MonoBehaviour
     {
         if ((col.gameObject.tag == "PipeLine" && col.gameObject != this.gameObject.transform.parent.gameObject) || (col.gameObject.tag == "PipeLineCurve" && col.gameObject != this.gameObject.transform.parent.gameObject))
         {
+            otherPipe = null;
             if (isTriggerLeft && col.gameObject.GetComponent<pipeScript>() == collidingPipeLeft)
             {
                 otherPipe = null;

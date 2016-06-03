@@ -88,7 +88,7 @@ public class PlayerControler : MonoBehaviour {
         isOnMenu = Input.GetButton("menu");
     }
 
-    void Update()
+    void LateUpdate()
     {
         
         #region Movment control
