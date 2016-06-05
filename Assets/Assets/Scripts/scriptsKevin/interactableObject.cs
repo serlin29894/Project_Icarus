@@ -11,13 +11,14 @@ public class interactableObject : MonoBehaviour {
     bool isIn;
     bool haveTakenTheLog;
 
+
     void Start ()
     {
-        logRef = gameObject.GetComponentInChildren<logScript>();        
+        logRef = gameObject.GetComponentInChildren<logScript>();
     }
     
     void Update ()
-    {        
+    {   
         if (isIn && playerRef.isInteracting && !haveTakenTheLog)
         {
             playerRef.logList.Add(logRef);
