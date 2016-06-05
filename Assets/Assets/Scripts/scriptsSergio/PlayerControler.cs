@@ -221,7 +221,7 @@ public class PlayerControler : MonoBehaviour {
 
 
 
-        else
+        else if (!isOnMenu)
         {
             Cursor.visible = false;
         }

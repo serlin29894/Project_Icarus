@@ -20,6 +20,7 @@ public class pipeScript : MonoBehaviour
     public bool isInContactDown;
     public bool isThisPipeStatic;
     public bool havePower;
+    public bool isTePipe;
     public float offSetX;
     public float offSetY;
 
@@ -54,6 +55,29 @@ public class pipeScript : MonoBehaviour
 
         //SI ESTA PIPE ESTA ENGANCHADA SOLO POR UN LADO Y CLICAN EN ELLA, DESENGANCHARLA
         ifItsAttachedAndClicked();       
+    }
+
+    //check if its TePipe and if it both of sides havve energy
+    void LateUpdate ()
+    {
+        if (isTePipe)
+        {
+            if (colliderRight.otherPipe != null && colliderLeft.otherPipe != null)
+            {
+                if (colliderLeft.otherPipe.havePower && colliderRight.otherPipe.havePower)
+                {
+                    havePower = true; 
+                }
+                else
+                {
+                    havePower = false;
+                }
+            }
+            else
+            {
+                havePower = false;
+            }
+        }
     }
 
     //FUNCTIONS
@@ -346,8 +370,6 @@ public class pipeScript : MonoBehaviour
         }
     }
 
-
-
     void attachedLogic()
     {
         if (isAttachedToAnotherPipe && !isBeingClicked)
@@ -408,8 +430,6 @@ public class pipeScript : MonoBehaviour
             }
         }
     }
-
-
 
     void ifItsAttachedAndClicked()
     {
@@ -512,7 +532,6 @@ public class pipeScript : MonoBehaviour
 
 
 
-
     //FUNCTIONS UNITY
     void OnMouseDown()
     {
@@ -530,9 +549,6 @@ public class pipeScript : MonoBehaviour
         }
     }
 
-
-
-
     void OnCollisionEnter()
     {
        /* this.GetComponent<AudioSource>().clip = ImpactSound;
@@ -542,8 +558,6 @@ public class pipeScript : MonoBehaviour
         this.GetComponent<AudioSource>().Play();
         */
     }
-
-
 
     //FALTA AÑADIR EL SISTEMA DE PARTICULAS: IF HAVEPOWER && ISATTACHEDTOANOTHERPIPE && !LEFTATTACHED || !RIGHTATTACHED -> EJECUTA SISTEMA DE PARTICULAS EN EL LEFTATTACHED O RIGHTATTACHED QUE TENGA VALOR FALSE
 }

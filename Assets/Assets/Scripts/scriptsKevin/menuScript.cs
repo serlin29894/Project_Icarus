@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class menuScript : MonoBehaviour {
 
     public PlayerControler playerRef;
@@ -14,7 +16,8 @@ public class menuScript : MonoBehaviour {
     public Button buttonWeaponLog;
     public Button buttonBack;
     public Text textToShow;
-    public int buttonClicked; 
+    public int buttonClicked;
+    public bool isMainMenu;
 
 	public enum states
     {
@@ -34,81 +37,84 @@ public class menuScript : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate () 
     {
-        if (playerRef.isOnMenu)
+        if (!isMainMenu)
         {
-            Time.timeScale = 0;
-            background.SetActive(true);
-            Cursor.visible = true;
-
-            //STATES
-            if (currentState == states.mainMenu)
-            {                
-                menu.SetActive(true);
-                logsRef.SetActive(false);
-                Cursor.visible = true;
-            }
-
-            if (currentState == states.logsList)
+            if (playerRef.isOnMenu)
             {
-                menu.SetActive(false);
-                logsRef.SetActive(true);
-                textToShow.gameObject.SetActive(false);
-                buttonWeaponLog.gameObject.SetActive(true);
-                buttonBack.gameObject.SetActive(true);
-                buttonLog1.gameObject.SetActive(true);
-                buttonLog2.gameObject.SetActive(true);
-                buttonLog3.gameObject.SetActive(true);
-                buttonLog4.gameObject.SetActive(true);
+                Time.timeScale = 0;
+                background.SetActive(true);
                 Cursor.visible = true;
 
-                buttonLog1.interactable = false;
-                buttonLog2.interactable = false;
-                buttonLog3.interactable = false;
-                buttonLog4.interactable = false;
-                buttonWeaponLog.interactable = false;
-                
-
-                foreach (logScript element in playerRef.logList)
+                //STATES
+                if (currentState == states.mainMenu)
                 {
-                    if (element.title == "log1")
+                    menu.SetActive(true);
+                    logsRef.SetActive(false);
+                    Cursor.visible = true;
+                }
+
+                if (currentState == states.logsList)
+                {
+                    menu.SetActive(false);
+                    logsRef.SetActive(true);
+                    textToShow.gameObject.SetActive(false);
+                    buttonWeaponLog.gameObject.SetActive(true);
+                    buttonBack.gameObject.SetActive(true);
+                    buttonLog1.gameObject.SetActive(true);
+                    buttonLog2.gameObject.SetActive(true);
+                    buttonLog3.gameObject.SetActive(true);
+                    buttonLog4.gameObject.SetActive(true);
+                    Cursor.visible = true;
+
+                    buttonLog1.interactable = false;
+                    buttonLog2.interactable = false;
+                    buttonLog3.interactable = false;
+                    buttonLog4.interactable = false;
+                    buttonWeaponLog.interactable = false;
+
+
+                    foreach (logScript element in playerRef.logList)
                     {
-                        buttonLog1.interactable = true;
+                        if (element.title == "log1")
+                        {
+                            buttonLog1.interactable = true;
+                        }
+                        if (element.title == "log2")
+                        {
+                            buttonLog2.interactable = true;
+                        }
+                        if (element.title == "log3")
+                        {
+                            buttonLog3.interactable = true;
+                        }
+                        if (element.title == "log4")
+                        {
+                            buttonLog4.interactable = true;
+                        }
+                        if (element.title == "weaponLog")
+                        {
+                            buttonWeaponLog.interactable = true;
+                        }
                     }
-                    if (element.title == "log2")
-                    {
-                        buttonLog2.interactable = true;
-                    }
-                    if (element.title == "log3")
-                    {
-                        buttonLog3.interactable = true;
-                    }
-                    if (element.title == "log4")
-                    {
-                        buttonLog4.interactable = true;
-                    }
-                    if (element.title == "weaponLog")
-                    {
-                        buttonWeaponLog.interactable = true;
-                    }
-                }               
+                }
+
+                if (currentState == states.readingLog)
+                {
+                    menu.SetActive(false);
+                    logsRef.SetActive(false);
+                    Cursor.visible = true;
+                    textToShow.gameObject.SetActive(true);
+                }
             }
 
-            if (currentState== states.readingLog)
+
+            //EXIT MENU & RETURN TO GAMEPLAY 
+            if (!playerRef.isOnMenu)
             {
+                Time.timeScale = 1;
+                background.SetActive(false);
                 menu.SetActive(false);
-                logsRef.SetActive(false);
-                Cursor.visible = true;
-                textToShow.gameObject.SetActive(true);                
             }
-        }
-
-
-        //EXIT MENU & RETURN TO GAMEPLAY 
-        if (!playerRef.isOnMenu )
-        {
-            Time.timeScale = 1;
-            background.SetActive(false);
-            menu.SetActive(false);
         }
 	}    
 
@@ -201,6 +207,21 @@ public class menuScript : MonoBehaviour {
                 playerRef.isOnMenu = true;
             }
         }
+    }
+
+    public void returnToMainMenu ()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void startGame ()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void exitApplication()
+    {
+        Application.Quit();
     }
 
     public void back ()
