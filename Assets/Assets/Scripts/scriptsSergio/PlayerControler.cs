@@ -150,18 +150,21 @@ public class PlayerControler : MonoBehaviour {
                 CameraMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
                 MousePos = CameraMouse.origin /*+ CameraMouse.direction*/ * (transform.position - Camera.main.transform.position).magnitude;
 
-                if (Physics.Raycast(CameraMouse, out TargetWeapon, Mathf.Infinity, 1 << 10)); 
+                if (Physics.Raycast(CameraMouse, out TargetWeapon, Mathf.Infinity, 1 << 10))
                 {
+                 
+                    
                    PlayerObjecDistance = (TargetWeapon.transform.position - transform.position).magnitude;
-
+                   
                    if (PlayerObjecDistance < 10 && !TargetWeapon.rigidbody.isKinematic)
                    {
-                      HaveObject = true;
-                      CurrentObject = TargetWeapon.transform.gameObject;
-                      CurrentObject.GetComponent<Rigidbody>().useGravity = false;
-                      CurrentObject.GetComponent<ObjectsBehavior>().takeit = true;
-                      velc = CurrentObject.GetComponent<Rigidbody>().velocity;
+                       HaveObject = true;
+                       CurrentObject = TargetWeapon.transform.gameObject;
+                       CurrentObject.GetComponent<Rigidbody>().useGravity = false;
+                       //CurrentObject.GetComponent<ObjectsBehavior>().takeit = true;
+                       velc = CurrentObject.GetComponent<Rigidbody>().velocity;
                    }
+                   
                 }
             }
 

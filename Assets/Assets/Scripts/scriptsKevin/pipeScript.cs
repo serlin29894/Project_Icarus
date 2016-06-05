@@ -26,6 +26,11 @@ public class pipeScript : MonoBehaviour
     public triggerScript colliderLeft;
     public triggerScript colliderRight;
 
+
+    public AudioClip DetachSound;
+    public AudioClip AtachSound;
+    public AudioClip ImpactSound;
+
     int counter;
     Vector3 vector;
 
@@ -90,6 +95,15 @@ public class pipeScript : MonoBehaviour
                     isAttachedToAnotherPipe = true;
                     leftAttached = true;
                     colliderLeft.collidingPipeLeft.rightAttached = true;
+
+
+
+                    this.GetComponent<AudioSource>().clip = AtachSound;
+                    this.GetComponent<AudioSource>().volume = 0.4f;
+                    this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+                    this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+                    this.GetComponent<AudioSource>().Play();
+
                 }
             }
             else if (isInContactLeft && colliderRight.isTriggerLeft)
@@ -114,6 +128,14 @@ public class pipeScript : MonoBehaviour
                     isAttachedToAnotherPipe = true;
                     leftAttached = true;
                     colliderRight.collidingPipeLeft.rightAttached = true;
+
+
+                    this.GetComponent<AudioSource>().clip = AtachSound;
+                    this.GetComponent<AudioSource>().volume = 0.4f;
+                    this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+                    this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+                    this.GetComponent<AudioSource>().Play();
+
                 }
             }
             //END LEFT COLLISION
@@ -141,6 +163,14 @@ public class pipeScript : MonoBehaviour
                     isAttachedToAnotherPipe = true;
                     rightAttached = true;
                     colliderRight.collidingPipeRight.leftAttached = true;
+
+
+                    this.GetComponent<AudioSource>().clip = AtachSound;
+                    this.GetComponent<AudioSource>().volume = 0.4f;
+                    this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+                    this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+                    this.GetComponent<AudioSource>().Play();
+
                 }
             }
             else if (isInContactRight && colliderLeft.isTriggerRight)
@@ -165,6 +195,14 @@ public class pipeScript : MonoBehaviour
                     isAttachedToAnotherPipe = true;
                     rightAttached = true;
                     colliderLeft.collidingPipeRight.leftAttached = true;
+
+
+                    this.GetComponent<AudioSource>().clip = AtachSound;
+                    this.GetComponent<AudioSource>().volume = 0.4f;
+                    this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+                    this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+                    this.GetComponent<AudioSource>().Play();
+
                 }
             }
             //END RIGHT COLLISION LOGIC
@@ -194,6 +232,14 @@ public class pipeScript : MonoBehaviour
                     isAttachedToAnotherPipe = true;
                     upAttached = true;
                     colliderLeft.collidingPipeUp.downAttached = true;
+
+
+                    this.GetComponent<AudioSource>().clip = AtachSound;
+                    this.GetComponent<AudioSource>().volume = 0.4f;
+                    this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+                    this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+                    this.GetComponent<AudioSource>().Play();
+
                 }
             }
             else if (isInContactUp && colliderRight.isTriggerUp)
@@ -218,6 +264,13 @@ public class pipeScript : MonoBehaviour
                     isAttachedToAnotherPipe = true;
                     upAttached = true;
                     colliderRight.collidingPipeUp.downAttached = true;
+
+
+                    this.GetComponent<AudioSource>().clip = AtachSound;
+                    this.GetComponent<AudioSource>().volume = 0.4f;
+                    this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+                    this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+                    this.GetComponent<AudioSource>().Play();
                 }
             }
             //END UP COLLISION LOGIC
@@ -245,6 +298,15 @@ public class pipeScript : MonoBehaviour
                     isAttachedToAnotherPipe = true;
                     downAttached = true;
                     colliderLeft.collidingPipeDown.upAttached = true;
+
+
+
+                    this.GetComponent<AudioSource>().clip = AtachSound;
+                    this.GetComponent<AudioSource>().volume = 0.4f;
+                    this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+                    this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+                    this.GetComponent<AudioSource>().Play();
+
                 }
             }
             else if (isInContactDown && colliderRight.isTriggerDown)
@@ -269,6 +331,13 @@ public class pipeScript : MonoBehaviour
                     isAttachedToAnotherPipe = true;
                     downAttached = true;
                     colliderRight.collidingPipeDown.upAttached = true;
+
+
+                    this.GetComponent<AudioSource>().clip = AtachSound;
+                    this.GetComponent<AudioSource>().volume = 0.4f;
+                    this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+                    this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+                    this.GetComponent<AudioSource>().Play();
                 }
             }
             //END DOWN COLLISION
@@ -352,19 +421,40 @@ public class pipeScript : MonoBehaviour
             #region horizontal
             if (leftAttached && colliderLeft.isTriggerLeft)
             {
+                this.GetComponent<AudioSource>().clip = DetachSound;
+                this.GetComponent<AudioSource>().volume = 0.4f;
+                this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+                this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+                this.GetComponent<AudioSource>().Play();
+
                 colliderLeft.collidingPipeLeft.rightAttached = false;
             }
             else if (leftAttached && colliderRight.isTriggerLeft)
             {
+                this.GetComponent<AudioSource>().clip = DetachSound;
+                this.GetComponent<AudioSource>().volume = 0.4f;
+                this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+                this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+                this.GetComponent<AudioSource>().Play();
                 colliderRight.collidingPipeLeft.rightAttached = false;
             }
 
             if (rightAttached && colliderRight.isTriggerRight)
             {
+                this.GetComponent<AudioSource>().clip = DetachSound;
+                this.GetComponent<AudioSource>().volume = 0.4f;
+                this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+                this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+                this.GetComponent<AudioSource>().Play();
                 colliderRight.collidingPipeRight.leftAttached = false;
             }
             else if (rightAttached && colliderLeft.isTriggerRight)
             {
+                this.GetComponent<AudioSource>().clip = DetachSound;
+                this.GetComponent<AudioSource>().volume = 0.4f;
+                this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+                this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+                this.GetComponent<AudioSource>().Play();
                 colliderLeft.collidingPipeRight.leftAttached = false;
             }
             #endregion
@@ -372,19 +462,39 @@ public class pipeScript : MonoBehaviour
             #region vertical
             if (upAttached && colliderLeft.isTriggerUp)
             {
+                this.GetComponent<AudioSource>().clip = DetachSound;
+                this.GetComponent<AudioSource>().volume = 0.4f;
+                this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+                this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+                this.GetComponent<AudioSource>().Play();
                 colliderLeft.collidingPipeUp.downAttached = false;
             }
             else if (upAttached && colliderRight.isTriggerUp)
             {
+                this.GetComponent<AudioSource>().clip = DetachSound;
+                this.GetComponent<AudioSource>().volume = 0.4f;
+                this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+                this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+                this.GetComponent<AudioSource>().Play();
                 colliderRight.collidingPipeUp.downAttached = false;
             }
 
             if (downAttached && colliderRight.isTriggerDown)
             {
+                this.GetComponent<AudioSource>().clip = DetachSound;
+                this.GetComponent<AudioSource>().volume = 0.4f;
+                this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+                this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+                this.GetComponent<AudioSource>().Play();
                 colliderRight.collidingPipeDown.upAttached = false;
             }
             else if (downAttached && colliderLeft.isTriggerDown)
             {
+                this.GetComponent<AudioSource>().clip = DetachSound;
+                this.GetComponent<AudioSource>().volume = 0.4f;
+                this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+                this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+                this.GetComponent<AudioSource>().Play();
                 colliderLeft.collidingPipeDown.upAttached = false;
             }
             #endregion
@@ -395,6 +505,8 @@ public class pipeScript : MonoBehaviour
             upAttached = false;
             downAttached = false;
             this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+
+            
         }
     }
 
@@ -417,5 +529,21 @@ public class pipeScript : MonoBehaviour
             isBeingClicked = false;
         }
     }
+
+
+
+
+    void OnCollisionEnter()
+    {
+       /* this.GetComponent<AudioSource>().clip = ImpactSound;
+        this.GetComponent<AudioSource>().volume = 0.4f;
+        this.GetComponent<AudioSource>().spatialBlend = 0.5f;
+        this.GetComponent<AudioSource>().reverbZoneMix = 0.6f;
+        this.GetComponent<AudioSource>().Play();
+        */
+    }
+
+
+
     //FALTA AÑADIR EL SISTEMA DE PARTICULAS: IF HAVEPOWER && ISATTACHEDTOANOTHERPIPE && !LEFTATTACHED || !RIGHTATTACHED -> EJECUTA SISTEMA DE PARTICULAS EN EL LEFTATTACHED O RIGHTATTACHED QUE TENGA VALOR FALSE
 }
