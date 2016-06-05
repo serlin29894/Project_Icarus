@@ -60,6 +60,7 @@ public class pipeScript : MonoBehaviour
     //check if its TePipe and if it both of sides havve energy
     void LateUpdate ()
     {
+        #region TePipeFunctionality
         if (isTePipe)
         {
             if (colliderRight.otherPipe != null && colliderLeft.otherPipe != null)
@@ -78,6 +79,25 @@ public class pipeScript : MonoBehaviour
                 havePower = false;
             }
         }
+        #endregion
+
+        #region particleSystem
+        if (this.havePower)
+        {
+            if (colliderLeft.otherPipe != null && colliderRight.otherPipe != null)
+            {
+
+            }
+            else
+            {
+                if (colliderLeft.otherPipe == null )
+                {
+                    colliderLeft.GetComponent<ParticleSystem>();
+                }
+            }
+        }
+
+        #endregion
     }
 
     //FUNCTIONS
