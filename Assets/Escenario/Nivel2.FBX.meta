@@ -1,0 +1,206 @@
+fileFormatVersion: 2
+guid: cad28ec5f5dd64242b80f37bb94c1d6b
+timeCreated: 1465066932
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Box261
+    100002: Box262
+    100004: Box263
+    100006: Box264
+    100008: Box265
+    100010: Box266
+    100012: Box267
+    100014: Box336
+    100016: Box345
+    100018: Box372
+    100020: Box383
+    100022: Columna015
+    100024: ColumnaNivell002
+    100026: ColumnaNivell003
+    100028: ColumnaNivell004
+    100030: ColumnaNivell005
+    100032: ColumnaNivell006
+    100034: ColumnaNivell1
+    100036: Generator003
+    100038: HAbitacionNivel002
+    100040: //RootNode
+    100042: Object098
+    100044: Object100
+    100046: Object101
+    100048: Object113
+    100050: PAred1Nivel003
+    100052: PAred1Nivel2
+    100054: Pared2Nivel003
+    100056: Pared2Nivel004
+    100058: SueloNivel002
+    400000: Box261
+    400002: Box262
+    400004: Box263
+    400006: Box264
+    400008: Box265
+    400010: Box266
+    400012: Box267
+    400014: Box336
+    400016: Box345
+    400018: Box372
+    400020: Box383
+    400022: Columna015
+    400024: ColumnaNivell002
+    400026: ColumnaNivell003
+    400028: ColumnaNivell004
+    400030: ColumnaNivell005
+    400032: ColumnaNivell006
+    400034: ColumnaNivell1
+    400036: Generator003
+    400038: HAbitacionNivel002
+    400040: //RootNode
+    400042: Object098
+    400044: Object100
+    400046: Object101
+    400048: Object113
+    400050: PAred1Nivel003
+    400052: PAred1Nivel2
+    400054: Pared2Nivel003
+    400056: Pared2Nivel004
+    400058: SueloNivel002
+    2300000: Box263
+    2300002: Box265
+    2300004: Box266
+    2300006: Box267
+    2300008: Box336
+    2300010: Box345
+    2300012: Box372
+    2300014: Box383
+    2300016: ColumnaNivell002
+    2300018: ColumnaNivell003
+    2300020: ColumnaNivell004
+    2300022: ColumnaNivell005
+    2300024: ColumnaNivell006
+    2300026: ColumnaNivell1
+    2300028: Generator003
+    2300030: HAbitacionNivel002
+    2300032: Object098
+    2300034: Object100
+    2300036: Object101
+    2300038: Object113
+    2300040: PAred1Nivel003
+    2300042: PAred1Nivel2
+    2300044: Pared2Nivel003
+    2300046: Pared2Nivel004
+    2300048: SueloNivel002
+    3300000: Box263
+    3300002: Box265
+    3300004: Box266
+    3300006: Box267
+    3300008: Box336
+    3300010: Box345
+    3300012: Box372
+    3300014: Box383
+    3300016: ColumnaNivell002
+    3300018: ColumnaNivell003
+    3300020: ColumnaNivell004
+    3300022: ColumnaNivell005
+    3300024: ColumnaNivell006
+    3300026: ColumnaNivell1
+    3300028: Generator003
+    3300030: HAbitacionNivel002
+    3300032: Object098
+    3300034: Object100
+    3300036: Object101
+    3300038: Object113
+    3300040: PAred1Nivel003
+    3300042: PAred1Nivel2
+    3300044: Pared2Nivel003
+    3300046: Pared2Nivel004
+    3300048: SueloNivel002
+    4300000: ColumnaNivell005
+    4300002: Generator003
+    4300004: PAred1Nivel003
+    4300006: Pared2Nivel004
+    4300008: Object101
+    4300010: ColumnaNivell006
+    4300012: Object100
+    4300014: Object113
+    4300016: Pared2Nivel003
+    4300018: ColumnaNivell004
+    4300020: Object098
+    4300022: ColumnaNivell1
+    4300024: ColumnaNivell003
+    4300026: ColumnaNivell002
+    4300028: SueloNivel002
+    4300030: PAred1Nivel2
+    4300032: Box263
+    4300034: Box265
+    4300036: Box266
+    4300038: Box267
+    4300040: Box383
+    4300042: Box336
+    4300044: Box372
+    4300046: Box345
+    4300048: HAbitacionNivel002
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -13,7 +13,8 @@ public class PlayerControler : MonoBehaviour {
     public float DelayFollowObject;
     public bool Grounded;
     public bool isOnStairs;
-    //public SeguimientoCamara Camera_reference;
+    public float ReductionSpeed;
+    
 
     #endregion
 
@@ -23,7 +24,7 @@ public class PlayerControler : MonoBehaviour {
     public GameObject arm_Move;
     public GameObject arm;
     public GameObject weapon;
-   // public bool isOnStairs;
+    
 
     #region Private var
 
@@ -56,9 +57,10 @@ public class PlayerControler : MonoBehaviour {
 
     private bool ColisionDetected;
 
+    private float InitialSpeed;
     #endregion
 
-    private bool pepe;
+    bool start;
 
 
     // Use this for initialization
@@ -74,7 +76,8 @@ public class PlayerControler : MonoBehaviour {
         ColliderInitialCenter = MyCollider.center;
 
         MyRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-        
+
+        InitialSpeed = Speed;
         
 	
 	}
@@ -112,7 +115,7 @@ public class PlayerControler : MonoBehaviour {
         //}
 
 
-     
+        WalkSound();
 
 
         #region Crounch
@@ -182,15 +185,6 @@ public class PlayerControler : MonoBehaviour {
 
                 Dot = Vector3.Dot(Vector3.Normalize(transform.position), Vector3.Normalize(MousePos - transform.position)) * -1;
 
-               //if (Dot >= 0)
-               //{
-               //    Debug.Log("Right");
-               //}
-               //else if (Dot < 0)
-               //{
-               //    Debug.Log("Lefht");
-               //}
-               //
                 PlayerObjecDistance = (TargetWeapon.transform.position - transform.position).magnitude;
 
                 if (PlayerObjecDistance > 10)
@@ -202,7 +196,7 @@ public class PlayerControler : MonoBehaviour {
                     CurrentObject = null;
                 }
 
-                CurrentObject.transform.position = Vector3.SmoothDamp(CurrentObject.transform.position, new Vector3(MousePos.x, MousePos.y, transform.position.z),ref  velc, DelayFollowObject);
+                CurrentObject.transform.position = Vector3.SmoothDamp(CurrentObject.transform.position, new Vector3(MousePos.x, MousePos.y, CurrentObject.transform.position.z),ref  velc, DelayFollowObject);
 
 
             }
@@ -218,6 +212,8 @@ public class PlayerControler : MonoBehaviour {
             Cursor.visible = false;
         }
         #endregion
+
+
 
         if (GravitonWeaponEquip && HaveObject )
         {
@@ -275,27 +271,23 @@ public class PlayerControler : MonoBehaviour {
         if (ColisionDetected)
         {
             MyRigidbody.velocity = new Vector3(0, MyRigidbody.velocity.y, MyRigidbody.velocity.z);
-            //MovementHorizontal = new Vector3(0, MyRigidbody.velocity.y, 0);
         }
         else
         {
             if (!Crounch)
             {
                 MyRigidbody.velocity = new Vector3(axisH * Speed, MyRigidbody.velocity.y, MyRigidbody.velocity.z);
-                //MovementHorizontal = new Vector3(axisH * Speed, MyRigidbody.velocity.y, 0);
 
             }
             else if (Crounch)
             {
-                MyRigidbody.velocity = new Vector3(axisH * SpeedCrounch, MyRigidbody.velocity.y, MyRigidbody.velocity.z);
-                //MovementHorizontal = new Vector3(axisH * SpeedCrounch, MyRigidbody.velocity.y, 0);
+                MyRigidbody.velocity = new Vector3(axisH * SpeedCrounch, MyRigidbody.velocity.y, MyRigidbody.velocity.z);   
             }
         }
 
         myAnim.SetFloat("Speed", Mathf.Abs(axisHorizontal));
-
-
         ChechkFacing();
+        BackAnimation();
 
     }
 
@@ -379,69 +371,96 @@ public class PlayerControler : MonoBehaviour {
 
     public void Jump()
     {
-        
-        Grounded = false;
-        Collider [] GroundColliders = Physics.OverlapSphere(this.transform.position - new Vector3(0, MyCollider.bounds.size.y, 0), 0.2f);
-        //Debug.DrawLine(this.transform.position - new Vector3(0, MyCollider.bounds.size.y, 0), this.transform.position - new Vector3(0, MyCollider.bounds.size.y, 0) + new Vector3(10,10,0), Color.black);
-        //Debug.Log(this.transform.position - new Vector3(0, MyCollider.bounds.size.y, 0));
-        for (int i=0; i <GroundColliders.Length; i++)
+        if (!HaveObject)
         {
-            if (GroundColliders[i].gameObject != gameObject && GroundColliders[i].gameObject.tag =="Ground")
+            Grounded = false;
+            Collider[] GroundColliders = Physics.OverlapSphere(this.transform.position - new Vector3(0, MyCollider.bounds.size.y - 1, 0), 0.2f);
+            
+            for (int i = 0; i < GroundColliders.Length; i++)
             {
-                Grounded = true;
+                if (GroundColliders[i].gameObject != gameObject && GroundColliders[i].gameObject.tag == "Ground")
+                {
+                    Grounded = true;
+                }
             }
-        }
 
-        if (Input.GetKeyDown(KeyCode.Space) &&  Grounded)
-        {
-            Debug.Log("dasda");
-            MyRigidbody.velocity = new Vector3(0, JumpForce, 0);
-        }
+            if (Input.GetKeyDown(KeyCode.Space) && Grounded)
+            {
+                myAnim.Play("StartJump");
+                MyRigidbody.velocity = new Vector3(0, JumpForce, 0);
+            }
 
-        myAnim.SetBool("Ground", Grounded);
-        myAnim.SetFloat("verSpeed", MyRigidbody.velocity.y);
+            myAnim.SetBool("Ground", Grounded);
+            myAnim.SetFloat("verSpeed", MyRigidbody.velocity.y);
+        }
     }
 
     public void ChechkFacing()
     {
         if (!HaveObject)
         {
-          if (axisHorizontal > 0)
+            myAnim.SetBool("HaveObject", false);
+           
+            if (axisHorizontal > 0)
           {
-              
               Puppet.flip = true;
           }
           else if (axisHorizontal < 0)
           {
-              
               Puppet.flip = false;
-
           }
       }
       else
       {
-        if (Dot >= 0)
-        {
-              if (Puppet.flip  )
-              {
-      
-              }
-              else
-              {
-                  Puppet.flip = true; 
-              }
-        }else if (Dot < 0)
-        {
-              if (!Puppet.flip)
-              {
-      
-              }
-              else
-              {
-                  Puppet.flip = false;
-              }
+            myAnim.SetBool("HaveObject", true);
+            if (Dot >= 0)
+         {
+
+               if (Puppet.flip)
+               {
+
+               }
+               else
+               {
+                    arm_Move.GetComponent<SpriteRenderer>().flipX = true;
+                   Puppet.flip = true; 
+               }
+         }
+             else if (Dot < 0)
+         {
+               if (!Puppet.flip)
+               {
+
+               }
+               else
+               {
+                    arm_Move.GetComponent<SpriteRenderer>().flipX = false;
+                    Puppet.flip = false;
+               }
           }
-      }
+       }
+    }
+
+    public void BackAnimation()
+    {
+        if (HaveObject)
+        {
+            if ((Dot >= 0 && axisHorizontal < 0) || (Dot < 0 && axisHorizontal > 0))
+            {
+                Speed = ReductionSpeed;
+                myAnim.SetBool("Back", true);
+            }
+            else 
+            {
+                Speed = InitialSpeed;
+                myAnim.SetBool("Back", false);
+            }
+        }
+        else
+        {
+            Speed = InitialSpeed;
+            myAnim.SetBool("Back", false);
+        }
     }
 
     public Rigidbody GetRigidbody()
@@ -449,23 +468,33 @@ public class PlayerControler : MonoBehaviour {
         return MyRigidbody;
     }
 
-    void OnTriggerEnter(Collider col)
+    public bool ReturnHaveObject()
     {
-        if (col.gameObject.layer == 9)
-        {
-           // Camera.main.GetComponent<SeguimientoCamara>().LimitsCamera = col.GetComponent<ZoneValues>();
-        }
+        return HaveObject;
     }
 
-    void OnTriggerStay(Collider col)
+    public Vector3 ObjectPos()
     {
-        if (col.gameObject.layer == 9)
-        {
-            //Camera.main.GetComponent<SeguimientoCamara>().LimitsCamera = col.GetComponent<ZoneValues>();
-        }
+        return CurrentObject.transform.position;
     }
 
-   
+   public void WalkSound()
+    {
+        
+            if ( Grounded && ( Mathf.Abs( MyRigidbody.velocity.x) > 0.1) )
+            {
+                if (this.GetComponent<AudioSource>().isPlaying == false)
+                {
+                  this.GetComponent<AudioSource>().Play();   
+                }
+            }
+            else
+            {
+                this.GetComponent<AudioSource>().Stop();
+            }
+        
+       
+    }
  
 
 }
