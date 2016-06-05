@@ -23,15 +23,26 @@ public class elevatorScript : MonoBehaviour {
                 isMoving = true;
                 playerRef.transform.parent = this.gameObject.transform;
                 playerRef.GetComponent<Rigidbody>().isKinematic = true;
+
+                if (this.GetComponent<AudioSource>().isPlaying == false)
+                {
+                    this.GetComponent<AudioSource>().Play();
+
+                }
             }
 
             if (this.transform.position == downLocation.transform.position)
-            {
-                Debug.Log("ismoving");
+            {    
                 targetPos = upLocation.position;
                 isMoving = true;
                 playerRef.transform.parent = this.gameObject.transform;
                 playerRef.GetComponent<Rigidbody>().isKinematic = true;
+
+                if (this.GetComponent<AudioSource>().isPlaying == false)
+                {
+                    this.GetComponent<AudioSource>().Play();
+
+                }
             }
             #endregion
         }
@@ -46,9 +57,12 @@ public class elevatorScript : MonoBehaviour {
 
         if (isMoving)
         {
-           
-
             this.transform.position = Vector3.MoveTowards(this.transform.position, targetPos, speed * Time.deltaTime);
+           
+        }
+        else
+        {
+            this.GetComponent<AudioSource>().Stop();
         }
 	
 	}

@@ -24,7 +24,9 @@ public class PlayerControler : MonoBehaviour {
     public GameObject arm_Move;
     public GameObject arm;
     public GameObject weapon;
-    
+    public AudioSource WeaponSound;
+    public AudioClip Shoot;
+    public AudioClip Laser;
 
     #region Private var
 
@@ -153,7 +155,6 @@ public class PlayerControler : MonoBehaviour {
                 if (Physics.Raycast(CameraMouse, out TargetWeapon, Mathf.Infinity, 1 << 10))
                 {
                  
-                    
                    PlayerObjecDistance = (TargetWeapon.transform.position - transform.position).magnitude;
                    
                    if (PlayerObjecDistance < 10 && !TargetWeapon.rigidbody.isKinematic)
@@ -163,7 +164,15 @@ public class PlayerControler : MonoBehaviour {
                        CurrentObject.GetComponent<Rigidbody>().useGravity = false;
                        //CurrentObject.GetComponent<ObjectsBehavior>().takeit = true;
                        velc = CurrentObject.GetComponent<Rigidbody>().velocity;
-                   }
+
+                        WeaponSound.clip = Shoot;
+                        WeaponSound.Play();
+                        WeaponSound.clip = Laser;
+                        WeaponSound.loop = true;
+                        WeaponSound.Play();
+
+
+                    }
                    
                 }
             }
@@ -189,6 +198,8 @@ public class PlayerControler : MonoBehaviour {
                 Dot = Vector3.Dot(Vector3.Normalize(transform.position), Vector3.Normalize(MousePos - transform.position)) * -1;
 
                 PlayerObjecDistance = (TargetWeapon.transform.position - transform.position).magnitude;
+
+               
 
                 if (PlayerObjecDistance > 10)
                 {
@@ -418,20 +429,21 @@ public class PlayerControler : MonoBehaviour {
             myAnim.SetBool("HaveObject", true);
             if (Dot >= 0)
          {
-
-               if (Puppet.flip)
+                arm_Move.GetComponent<SpriteRenderer>().flipX = true;
+                if (Puppet.flip)
                {
 
                }
                else
                {
-                    arm_Move.GetComponent<SpriteRenderer>().flipX = true;
+                    
                    Puppet.flip = true; 
                }
          }
              else if (Dot < 0)
          {
-               if (!Puppet.flip)
+                arm_Move.GetComponent<SpriteRenderer>().flipX = false;
+                if (!Puppet.flip)
                {
 
                }
