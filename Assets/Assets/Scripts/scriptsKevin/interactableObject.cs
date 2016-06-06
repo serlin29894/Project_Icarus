@@ -10,6 +10,7 @@ public class interactableObject : MonoBehaviour {
     public menuScript menuRef;
     bool isIn;
     bool haveTakenTheLog;
+    public bool isDestroyable;
 
 
     void Start ()
@@ -43,6 +44,11 @@ public class interactableObject : MonoBehaviour {
             if (logRef.title == "log4")
             {
                 menuRef.log4Mission();
+            }
+
+            if (isDestroyable)
+            {
+                Destroy(this.gameObject);
             }
         }
     }
